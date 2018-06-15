@@ -28,6 +28,7 @@ BuildRequires: cmake(Qt5Qml)
 BuildRequires: cmake(Qt5Test)
 BuildRequires: pkgconfig(ply-boot-client)
 BuildRequires: pkgconfig(ply-splash-core)
+BuildRequires: kcmutils
 
 %description
 SystemSettings module for selecting bootup themes
