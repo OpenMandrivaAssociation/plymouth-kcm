@@ -34,7 +34,7 @@ BuildRequires: kcmutils
 SystemSettings module for selecting bootup themes
 
 %prep
-%autosetup
+%setup -q
 %cmake_kde5
 
 %build
