@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   plymouth-kcm-5.12.6.tar.xz: fdf19ba4ddd221a9993cc72ef3967ce6bcc350c1
+sources:
+  plymouth-kcm-5.12.7.tar.xz: 2645b5476e8a1b83e7a5ac25d795ff9c5d030118
