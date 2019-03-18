@@ -5,7 +5,7 @@
 
 Name: plymouth-kcm
 Version: 5.15.3
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Summary: SystemSettings module for selecting bootup themes
 URL: http://kde.org/
