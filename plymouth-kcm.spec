@@ -1,11 +1,10 @@
-%define _disable_lto 1
 %define debug_package %{nil}
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: plymouth-kcm
 Version: 5.16.4
-Release: 1
+Release: 2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Summary: SystemSettings module for selecting bootup themes
 URL: http://kde.org/
@@ -32,10 +31,10 @@ BuildRequires: pkgconfig(ply-splash-core)
 BuildRequires: kcmutils
 
 %description
-SystemSettings module for selecting bootup themes
+SystemSettings module for selecting bootup themes.
 
 %prep
-%autosetup
+%autosetup -p1
 %cmake_kde5
 
 %build
