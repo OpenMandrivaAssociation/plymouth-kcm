@@ -1,0 +1,14 @@
+diff -up plymouth-kcm-5.17.0/src/kcm.cpp.omv~ plymouth-kcm-5.17.0/src/kcm.cpp
+--- plymouth-kcm-5.17.0/src/kcm.cpp.omv~	2019-10-10 23:05:15.796765009 +0200
++++ plymouth-kcm-5.17.0/src/kcm.cpp	2019-10-10 23:08:18.704617762 +0200
+@@ -51,8 +51,8 @@ K_PLUGIN_FACTORY_WITH_JSON(KCMPlymouthFa
+ KCMPlymouth::KCMPlymouth(QObject* parent, const QVariantList& args)
+     : KQuickAddons::ConfigModule(parent, args)
+ {
+-    qmlRegisterType<QStandardItemModel>();
+-    qmlRegisterType<KCMPlymouth>();
++    qmlRegisterAnonymousType<QStandardItemModel>("", 1);
++    qmlRegisterAnonymousType<KCMPlymouth>("", 1);
+     KAboutData* about = new KAboutData(QStringLiteral("kcm_plymouth"), i18n("Boot Splash Screen"),
+                                        QStringLiteral(PLYMOUTH_KCM_VERSION), QString(), KAboutLicense::LGPL);
+     about->addAuthor(i18n("Marco Martin"), QString(), QStringLiteral("mart@kde.org"));

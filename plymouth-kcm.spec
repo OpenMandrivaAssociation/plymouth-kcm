@@ -3,9 +3,10 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: plymouth-kcm
-Version: 5.16.90
+Version: 5.17.0
 Release: 1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
+Patch0: plymouth-kcm-5.17-qt-5.14.patch
 Summary: SystemSettings module for selecting bootup themes
 URL: http://kde.org/
 License: GPL
