@@ -4,12 +4,14 @@
 
 Name: plymouth-kcm
 Version:	5.18.3
-Release:	1
+Release:	2
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Summary: SystemSettings module for selecting bootup themes
 URL: http://kde.org/
 License: GPL
 Group: Graphical desktop/KDE
+# (tpg) use dracut instead of broken update-alternatives to set plymouth theme
+Patch0: https://src.fedoraproject.org/rpms/plymouth-kcm/raw/master/f/0001-fedora.patch
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(KF5Archive)
 BuildRequires: cmake(KF5Auth)
@@ -29,6 +31,7 @@ BuildRequires: cmake(Qt5Test)
 BuildRequires: pkgconfig(ply-boot-client)
 BuildRequires: pkgconfig(ply-splash-core)
 BuildRequires: kcmutils
+Recommends: dracut
 
 %description
 SystemSettings module for selecting bootup themes.
