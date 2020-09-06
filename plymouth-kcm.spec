@@ -3,15 +3,14 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: plymouth-kcm
-Version:	5.19.4
+Version:	5.19.5
 Release:	1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Summary: SystemSettings module for selecting bootup themes
 URL: http://kde.org/
 License: GPL
 Group: Graphical desktop/KDE
-# (tpg) use dracut instead of broken update-alternatives to set plymouth theme
-Patch0: https://src.fedoraproject.org/rpms/plymouth-kcm/raw/master/f/0001-fedora.patch
+Patch0: plymouth-kcm-dracut.patch
 BuildRequires: cmake(ECM)
 BuildRequires: cmake(KF5Archive)
 BuildRequires: cmake(KF5Auth)
