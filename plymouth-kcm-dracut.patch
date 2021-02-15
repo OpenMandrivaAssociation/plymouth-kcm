@@ -1,13 +1,13 @@
-diff -up plymouth-kcm-5.19.5/src/helper.cpp.1~ plymouth-kcm-5.19.5/src/helper.cpp
---- plymouth-kcm-5.19.5/src/helper.cpp.1~	2020-09-01 12:41:37.000000000 +0200
-+++ plymouth-kcm-5.19.5/src/helper.cpp	2020-09-07 00:37:25.914529336 +0200
-@@ -53,111 +53,19 @@ ActionReply PlymouthHelper::save(const Q
+diff -up plymouth-kcm-5.21.0/src/helper.cpp.1~ plymouth-kcm-5.21.0/src/helper.cpp
+--- plymouth-kcm-5.21.0/src/helper.cpp.1~	2021-02-11 13:22:36.000000000 +0100
++++ plymouth-kcm-5.21.0/src/helper.cpp	2021-02-15 01:15:52.109019245 +0100
+@@ -53,105 +53,19 @@ ActionReply PlymouthHelper::save(const Q
      QFile configFile(QStringLiteral(PLYMOUTH_CONFIG_PATH));
-     configFile.setPermissions(QFileDevice::ReadOwner|QFileDevice::WriteOwner|QFileDevice::ReadGroup|QFileDevice::ReadOther);
+     configFile.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ReadGroup | QFileDevice::ReadOther);
  
--    //Special case: Ubuntu derivatives, which work different from everybody else
+-    // Special case: Ubuntu derivatives, which work different from everybody else
 -    if (QFile::exists(QStringLiteral("/usr/sbin/update-alternatives"))) {
--        //find the .plymouth file in the theme
+-        // find the .plymouth file in the theme
 -        QDir dir(QStringLiteral(PLYMOUTH_THEMES_DIR) + theme);
 -        QStringList themeFile = dir.entryList(QStringList() << QStringLiteral("*.plymouth"));
 -        if (themeFile.count() != 1) {
@@ -29,12 +29,11 @@ diff -up plymouth-kcm-5.19.5/src/helper.cpp.1~ plymouth-kcm-5.19.5/src/helper.cp
 -            reply = ActionReply::BackendError;
 -            reply.setErrorDescription(i18n("update-alternatives failed to run."));
 -            return reply;
--        }
--        else {
+-        } else {
 -            data = checkProcess.readAllStandardOutput();
 -        }
 -        ret = checkProcess.exitCode();
--        
+-
 -        if (ret != 0) {
 -            reply = ActionReply(ActionReply::HelperErrorReply());
 -            reply.setErrorCode(static_cast<ActionReply::Error>(ret));
@@ -45,12 +44,10 @@ diff -up plymouth-kcm-5.19.5/src/helper.cpp.1~ plymouth-kcm-5.19.5/src/helper.cp
 -        if (!data.contains(installFile.toUtf8())) {
 -            qDebug() << "Plymouth file not found in update-alternatives. So install it";
 -            QProcess installProcess;
--            installProcess.start(QStringLiteral("update-alternatives"), QStringList() << QStringLiteral("--install")
--                                 << QStringLiteral("/usr/share/plymouth/themes/default.plymouth")
--                                 << QStringLiteral("default.plymouth")
--                                 << installFile
--                                 << QStringLiteral("100"));
--            
+-            installProcess.start(QStringLiteral("update-alternatives"),
+-                                 QStringList() << QStringLiteral("--install") << QStringLiteral("/usr/share/plymouth/themes/default.plymouth")
+-                                               << QStringLiteral("default.plymouth") << installFile << QStringLiteral("100"));
+-
 -            if (!installProcess.waitForStarted()) {
 -                reply = ActionReply::BackendError;
 -                reply.setErrorDescription(i18n("Cannot start update-alternatives."));
@@ -62,20 +59,17 @@ diff -up plymouth-kcm-5.19.5/src/helper.cpp.1~ plymouth-kcm-5.19.5/src/helper.cp
 -                return reply;
 -            }
 -            ret = installProcess.exitCode();
--            
+-
 -            if (ret != 0) {
 -                reply = ActionReply(ActionReply::HelperErrorReply());
 -                reply.setErrorCode(static_cast<ActionReply::Error>(ret));
 -                reply.setErrorDescription(i18n("update-alternatives returned with error condition %1.", ret));
 -                return reply;
 -            }
--        }
--        else {
+-        } else {
 -            qDebug() << "Running update-alternatives --set  now";
 -            QProcess process;
--            process.start(QStringLiteral("update-alternatives"), QStringList() << QStringLiteral("--set")
--                          << QStringLiteral("default.plymouth")
--                          << installFile);
+-            process.start(QStringLiteral("update-alternatives"), QStringList() << QStringLiteral("--set") << QStringLiteral("default.plymouth") << installFile);
 -            if (!process.waitForStarted()) {
 -                reply = ActionReply::BackendError;
 -                reply.setErrorDescription(i18n("Cannot start update-alternatives."));
@@ -87,7 +81,7 @@ diff -up plymouth-kcm-5.19.5/src/helper.cpp.1~ plymouth-kcm-5.19.5/src/helper.cp
 -                return reply;
 -            }
 -            ret = process.exitCode();
--            
+-
 -            if (ret != 0) {
 -                reply = ActionReply(ActionReply::HelperErrorReply());
 -                reply.setErrorCode(static_cast<ActionReply::Error>(ret));
@@ -117,7 +111,7 @@ diff -up plymouth-kcm-5.19.5/src/helper.cpp.1~ plymouth-kcm-5.19.5/src/helper.cp
          return reply;
      }
      ret = process.exitCode();
-@@ -167,7 +75,7 @@ ActionReply PlymouthHelper::save(const Q
+@@ -161,7 +75,7 @@ ActionReply PlymouthHelper::save(const Q
      } else {
          reply = ActionReply(ActionReply::HelperErrorReply());
          reply.setErrorCode(static_cast<ActionReply::Error>(ret));
@@ -126,13 +120,13 @@ diff -up plymouth-kcm-5.19.5/src/helper.cpp.1~ plymouth-kcm-5.19.5/src/helper.cp
          return reply;
      }
  }
-@@ -236,43 +144,6 @@ ActionReply PlymouthHelper::install(cons
+@@ -232,41 +146,6 @@ ActionReply PlymouthHelper::install(cons
  
      archive->close();
  
--    //Special case: Ubuntu derivatives, which work different from everybody else
+-    // Special case: Ubuntu derivatives, which work different from everybody else
 -    if (QFile::exists(QStringLiteral("/usr/sbin/update-alternatives"))) {
--        //find the .plymouth file in the theme
+-        // find the .plymouth file in the theme
 -        QDir dir(themePath);
 -        QStringList themeFile = dir.entryList(QStringList() << QStringLiteral("*.plymouth"));
 -        if (themeFile.count() != 1) {
@@ -142,11 +136,9 @@ diff -up plymouth-kcm-5.19.5/src/helper.cpp.1~ plymouth-kcm-5.19.5/src/helper.cp
 -        }
 -        int ret = 0;
 -        QProcess process;
--        process.start(QStringLiteral("update-alternatives"), QStringList() << QStringLiteral("--install")
--                      << QStringLiteral("/usr/share/plymouth/themes/default.plymouth")
--                      << QStringLiteral("default.plymouth")
--                      << themePath + QLatin1Char('/') + themeFile.first()
--                      << QStringLiteral("100"));
+-        process.start(QStringLiteral("update-alternatives"),
+-                      QStringList() << QStringLiteral("--install") << QStringLiteral("/usr/share/plymouth/themes/default.plymouth")
+-                                    << QStringLiteral("default.plymouth") << themePath + QLatin1Char('/') + themeFile.first() << QStringLiteral("100"));
 -        if (!process.waitForStarted()) {
 -            reply = ActionReply::BackendError;
 -            reply.setErrorDescription(i18n("Cannot start update-alternatives."));
@@ -170,13 +162,13 @@ diff -up plymouth-kcm-5.19.5/src/helper.cpp.1~ plymouth-kcm-5.19.5/src/helper.cp
      QVariantMap map;
      map[QStringLiteral("plugin")] = themeName;
      map[QStringLiteral("path")] = themePath;
-@@ -304,41 +175,6 @@ ActionReply PlymouthHelper::uninstall(co
+@@ -298,40 +177,6 @@ ActionReply PlymouthHelper::uninstall(co
          return reply;
      }
  
--    //Special case: Ubuntu derivatives, which work different from everybody else
+-    // Special case: Ubuntu derivatives, which work different from everybody else
 -    if (QFile::exists(QStringLiteral("/usr/sbin/update-alternatives"))) {
--        //find the .plymouth file in the theme
+-        // find the .plymouth file in the theme
 -        QStringList themeFile = dir.entryList(QStringList() << QStringLiteral("*.plymouth"));
 -        if (themeFile.count() != 1) {
 -            reply = ActionReply::BackendError;
@@ -186,9 +178,8 @@ diff -up plymouth-kcm-5.19.5/src/helper.cpp.1~ plymouth-kcm-5.19.5/src/helper.cp
 -        int ret = 0;
 -        QProcess process;
 -
--        process.start(QStringLiteral("update-alternatives"), QStringList() << QStringLiteral("--remove")
--                      << QStringLiteral("default.plymouth")
--                      << dir.path() + QLatin1Char('/') + themeFile.first());
+-        process.start(QStringLiteral("update-alternatives"),
+-                      QStringList() << QStringLiteral("--remove") << QStringLiteral("default.plymouth") << dir.path() + QLatin1Char('/') + themeFile.first());
 -        if (!process.waitForStarted()) {
 -            reply = ActionReply::BackendError;
 -            reply.setErrorDescription(i18n("Cannot start update-alternatives."));
