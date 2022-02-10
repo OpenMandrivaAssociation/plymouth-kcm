@@ -2,8 +2,8 @@
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Name: plymouth-kcm
-Version:	5.23.5
-Release:	2
+Version:	5.24.0
+Release:	1
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/%{name}-%{version}.tar.xz
 Summary: SystemSettings module for selecting bootup themes
 URL: http://kde.org/
@@ -48,10 +48,10 @@ SystemSettings module for selecting bootup themes.
 %files -f %{name}.lang
 %{_bindir}/kplymouththemeinstaller
 %{_libdir}/libexec/kauth/plymouthhelper
-%{_libdir}/qt5/plugins/kcms/kcm_plymouth.so
 %{_datadir}/dbus-1/system.d/org.kde.kcontrol.kcmplymouth.conf
 %{_datadir}/dbus-1/system-services/org.kde.kcontrol.kcmplymouth.service
 %{_datadir}/kpackage/kcms/kcm_plymouth
-%{_datadir}/kservices5/kcm_plymouth.desktop
 %{_datadir}/knsrcfiles/plymouth.knsrc
 %{_datadir}/polkit-1/actions/org.kde.kcontrol.kcmplymouth.policy
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings/kcm_plymouth.so
+%{_datadir}/applications/kcm_plymouth.desktop
