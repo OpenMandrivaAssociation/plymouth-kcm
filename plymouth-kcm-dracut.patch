@@ -1,7 +1,7 @@
-diff -up plymouth-kcm-5.24.0/src/helper.cpp.1~ plymouth-kcm-5.24.0/src/helper.cpp
---- plymouth-kcm-5.24.0/src/helper.cpp.1~	2022-02-10 01:06:21.786667421 +0100
-+++ plymouth-kcm-5.24.0/src/helper.cpp	2022-02-10 01:08:32.052603627 +0100
-@@ -88,80 +88,17 @@ ActionReply PlymouthHelper::save(const Q
+diff -up plymouth-kcm-5.24.4/src/helper.cpp.1~ plymouth-kcm-5.24.4/src/helper.cpp
+--- plymouth-kcm-5.24.4/src/helper.cpp.1~	2022-03-29 13:38:15.000000000 +0200
++++ plymouth-kcm-5.24.4/src/helper.cpp	2022-04-26 01:14:48.242704142 +0200
+@@ -88,75 +88,12 @@ ActionReply PlymouthHelper::save(const Q
      QFile configFile(QStringLiteral(PLYMOUTH_CONFIG_PATH));
      configFile.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ReadGroup | QFileDevice::ReadOther);
  
@@ -79,14 +79,17 @@ diff -up plymouth-kcm-5.24.0/src/helper.cpp.1~ plymouth-kcm-5.24.0/src/helper.cp
 +        reply.setErrorDescription(i18n("Cannot start dracut."));
          return reply;
      }
-     if (!process.waitForFinished(std::chrono::milliseconds(1min).count())) {
+     // We don't know how long this will take. The helper will need to generate N=installed_kernels initrds.
+@@ -164,7 +101,7 @@ ActionReply PlymouthHelper::save(const Q
+     // NB: there is also a timeout in the KCM
+     if (!process.waitForFinished(std::chrono::milliseconds(15min).count())) {
          reply = ActionReply::BackendError;
 -        reply.setErrorDescription(i18n("Initramfs failed to run."));
 +        reply.setErrorDescription(i18n("Dracut failed to run."));
          return reply;
      }
  
-@@ -171,7 +108,7 @@ ActionReply PlymouthHelper::save(const Q
+@@ -174,7 +111,7 @@ ActionReply PlymouthHelper::save(const Q
      }
      reply = ActionReply(ActionReply::HelperErrorReply());
      reply.setErrorCode(static_cast<ActionReply::Error>(ret));
@@ -95,7 +98,7 @@ diff -up plymouth-kcm-5.24.0/src/helper.cpp.1~ plymouth-kcm-5.24.0/src/helper.cp
      return reply;
  }
  
-@@ -244,22 +181,6 @@ ActionReply PlymouthHelper::install(cons
+@@ -247,22 +184,6 @@ ActionReply PlymouthHelper::install(cons
  
      archive->close();
  
@@ -118,7 +121,7 @@ diff -up plymouth-kcm-5.24.0/src/helper.cpp.1~ plymouth-kcm-5.24.0/src/helper.cp
      QVariantMap map;
      map[QStringLiteral("plugin")] = themeName;
      map[QStringLiteral("path")] = themePath;
-@@ -291,40 +212,6 @@ ActionReply PlymouthHelper::uninstall(co
+@@ -294,40 +215,6 @@ ActionReply PlymouthHelper::uninstall(co
          return reply;
      }
  
