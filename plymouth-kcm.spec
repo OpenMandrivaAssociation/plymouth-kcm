@@ -30,6 +30,8 @@ BuildRequires: cmake(Qt5Test)
 BuildRequires: pkgconfig(ply-boot-client)
 BuildRequires: pkgconfig(ply-splash-core)
 BuildRequires: kcmutils
+Requires: plymouth
+Recommends: plymouth(system-theme)
 Recommends: dracut
 
 %description
@@ -47,11 +49,12 @@ SystemSettings module for selecting bootup themes.
 %find_lang %{name} --all-name --with-html
 
 %files -f %{name}.lang
+%dir %{_datadir}/kpackage/kcms/kcm_plymouth
 %{_bindir}/kplymouththemeinstaller
 %{_libdir}/libexec/kauth/plymouthhelper
 %{_datadir}/dbus-1/system.d/org.kde.kcontrol.kcmplymouth.conf
 %{_datadir}/dbus-1/system-services/org.kde.kcontrol.kcmplymouth.service
-%{_datadir}/kpackage/kcms/kcm_plymouth
+%{_datadir}/kpackage/kcms/kcm_plymouth/*
 %{_datadir}/knsrcfiles/plymouth.knsrc
 %{_datadir}/polkit-1/actions/org.kde.kcontrol.kcmplymouth.policy
 %{_libdir}/qt5/plugins/plasma/kcms/systemsettings/kcm_plymouth.so

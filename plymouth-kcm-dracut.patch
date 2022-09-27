@@ -1,3 +1,7 @@
+We do not se update-alternatives for plymouth theme
+After a theme change initrd regeneration is needed
+so that' why dracut is called
+
 diff -up plymouth-kcm-5.24.4/src/helper.cpp.1~ plymouth-kcm-5.24.4/src/helper.cpp
 --- plymouth-kcm-5.24.4/src/helper.cpp.1~	2022-03-29 13:38:15.000000000 +0200
 +++ plymouth-kcm-5.24.4/src/helper.cpp	2022-04-26 01:14:48.242704142 +0200
