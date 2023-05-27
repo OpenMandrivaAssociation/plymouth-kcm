@@ -35,7 +35,6 @@ BuildRequires: cmake(Qt6Qml)
 BuildRequires: cmake(Qt6Test)
 BuildRequires: pkgconfig(ply-boot-client)
 BuildRequires: pkgconfig(ply-splash-core)
-BuildRequires: kcmutils
 Requires: plymouth
 Recommends: plymouth(system-theme)
 Recommends: dracut
