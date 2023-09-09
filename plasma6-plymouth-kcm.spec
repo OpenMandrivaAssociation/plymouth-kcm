@@ -1,6 +1,6 @@
 %define plasmaver %(echo %{version} |cut -d. -f1-3)
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
-%define git 20230902
+%define git 20230909
 
 Name: plasma6-plymouth-kcm
 Version:	5.27.5
@@ -60,7 +60,7 @@ SystemSettings module for selecting bootup themes.
 
 %files -f %{name}.lang
 %{_bindir}/kplymouththemeinstaller
-%{_libdir}/libexec/kauth/plymouthhelper
+%{_libdir}/libexec/kf6/kauth/plymouthhelper
 %{_datadir}/dbus-1/system.d/org.kde.kcontrol.kcmplymouth.conf
 %{_datadir}/dbus-1/system-services/org.kde.kcontrol.kcmplymouth.service
 %{_datadir}/knsrcfiles/plymouth.knsrc
