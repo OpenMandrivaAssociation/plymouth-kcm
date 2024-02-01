@@ -3,7 +3,7 @@
 #define git 20231104
 
 Name: plasma6-plymouth-kcm
-Version:	5.92.0
+Version:	5.93.0
 Release:	%{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plymouth-kcm/-/archive/master/plymouth-kcm-master.tar.bz2#/plymouth-kcm-%{git}.tar.bz2
