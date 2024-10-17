@@ -13,7 +13,7 @@ Source0:	https://invent.kde.org/plasma/plymouth-kcm/-/archive/%{gitbranch}/plymo
 Source0: http://download.kde.org/%{stable}/plasma/%{plasmaver}/plymouth-kcm-%{version}.tar.xz
 %endif
 Summary: SystemSettings module for selecting bootup themes
-URL: http://kde.org/
+URL: https://kde.org/
 License: GPL
 Group: Graphical desktop/KDE
 Patch0: plymouth-kcm-dracut.patch
