@@ -5,7 +5,7 @@
 %define gitbranchd %(echo %{gitbranch} |sed -e "s,/,-,g")
 
 Name: plymouth-kcm
-Version:	6.3.5
+Version:	6.4.0
 Release:	%{?git:0.%{git}.}1
 %if 0%{?git:1}
 Source0:	https://invent.kde.org/plasma/plymouth-kcm/-/archive/%{gitbranch}/plymouth-kcm-%{gitbranchd}.tar.bz2#/plymouth-kcm-%{git}.tar.bz2
